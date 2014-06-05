@@ -10,6 +10,8 @@ public class Dispatcher {
         Path path = Paths.get(rootDirectory + requestedResource);
         if (isBadRequest(method, requestedResource)) {
             return new BadRequestResponseBuilder();
+        } else if (isOptionsRequest(method)) {
+            return new OptionsResponseBuilder();
         } else if (isDirectory(path)) {
             return new DirectoryResponseBuilder(rootDirectory, requestedResource);
         } else if (isFile(path)) {
@@ -30,5 +32,9 @@ public class Dispatcher {
 
     private static boolean isFile(Path path) {
         return Files.exists(path);
+    }
+
+    private static boolean isOptionsRequest(String method) {
+        return (method.equals("OPTIONS"));
     }
 }
