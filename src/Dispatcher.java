@@ -1,6 +1,7 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 /**
  * Created by mrk on 6/2/14.
@@ -10,6 +11,8 @@ public class Dispatcher {
         Path path = Paths.get(rootDirectory + requestedResource);
         if (isBadRequest(method, requestedResource)) {
             return new BadRequestResponseBuilder();
+        } else if (isNotAllowedMethod(method, requestedResource)) {
+            return new MethodNotAllowedResponseBuilder();
         } else if (isOptionsRequest(method)) {
             return new OptionsResponseBuilder();
         } else if (isRedirect(requestedResource)) {
@@ -42,5 +45,18 @@ public class Dispatcher {
 
     private static boolean isOptionsRequest(String method) {
         return (method.equals("OPTIONS"));
+    }
+
+    private static boolean isNotAllowedMethod(String method, String requestedResource) {
+        ArrayList<String> validMethods = new ArrayList<String>();
+        validMethods.add("GET");
+        validMethods.add("HEAD");
+        validMethods.add("OPTIONS");
+
+        ArrayList<String> simpleResources = new ArrayList<String>();
+        simpleResources.add("/file1");
+        simpleResources.add("/text-file.txt");
+
+        return (!validMethods.contains(method) && simpleResources.contains(requestedResource));
     }
 }

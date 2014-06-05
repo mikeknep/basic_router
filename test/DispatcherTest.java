@@ -32,4 +32,9 @@ public class DispatcherTest {
     public void itRoutesRedirectRequestToRedirectResponseBuilder() {
         assertEquals(RedirectResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/redirect").getClass());
     }
+
+    @Test
+    public void itRoutesDisallowedMethodToMethodNotAllowedResponseBuilder() {
+        assertEquals(MethodNotAllowedResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "POST", "/file1").getClass());
+    }
 }
