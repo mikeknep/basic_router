@@ -12,6 +12,8 @@ public class Dispatcher {
             return new BadRequestResponseBuilder();
         } else if (isOptionsRequest(method)) {
             return new OptionsResponseBuilder();
+        } else if (isRedirect(requestedResource)) {
+            return new RedirectResponseBuilder();
         } else if (isDirectory(path)) {
             return new DirectoryResponseBuilder(rootDirectory, requestedResource);
         } else if (isFile(path)) {
@@ -24,6 +26,10 @@ public class Dispatcher {
 
     private static boolean isBadRequest(String method, String requestedResource) {
         return (method.equals("") && requestedResource.equals(""));
+    }
+
+    private static boolean isRedirect(String requestedResource) {
+        return (requestedResource.equals("/redirect"));
     }
 
     private static boolean isDirectory(Path path) {

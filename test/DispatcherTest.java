@@ -27,4 +27,9 @@ public class DispatcherTest {
     public void itRoutesMissingResourceRequestToMissingResourceResponseBuilder() {
         assertEquals(MissingResourceResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/not_here.html").getClass());
     }
+
+    @Test
+    public void itRoutesRedirectRequestToRedirectResponseBuilder() {
+        assertEquals(RedirectResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/redirect").getClass());
+    }
 }
