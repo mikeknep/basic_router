@@ -11,7 +11,7 @@ import com.mikeknep.basic_router.utils.Responder;
 public class Main {
     public static void main(String[] args) throws Exception {
         Parser parser = new Parser(args);
-        ResponseBuilder builder = Dispatcher.setResponseBuilder(parser.getRootDirectory(), parser.getMethod(), parser.getRequestedResource());
+        ResponseBuilder builder = Dispatcher.setResponseBuilder(parser.getRootDirectory(), parser.getMethod(), parser.getRequestedResource(), parser.getBody());
         Responder.sendData(builder.getStatus(), builder.getHeaders(), builder.getBody());
     }
 }
