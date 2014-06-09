@@ -1,26 +1,21 @@
 package com.mikeknep.basic_router.builders;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by mrk on 6/9/14.
  */
 public class PartialContentResponseBuilder implements ResponseBuilder {
     private String rootDirectory;
-    private String rawHeaders;
+    private HashMap<String, String> requestHeaders;
     private String requestedResource;
 
-    public PartialContentResponseBuilder(String rootDirectory, String rawHeaders, String requestedResource) {
+    public PartialContentResponseBuilder(String rootDirectory, HashMap<String, String> requestHeaders, String requestedResource) {
         this.rootDirectory = rootDirectory;
-        this.rawHeaders = rawHeaders;
+        this.requestHeaders = requestHeaders;
         this.requestedResource = requestedResource;
     }
 
@@ -48,11 +43,7 @@ public class PartialContentResponseBuilder implements ResponseBuilder {
     }
 
     private String rawByteRange() {
-        Pattern pattern = Pattern.compile("(Range: bytes=[0-9]*-[0-9]*)");
-        Matcher matcher = pattern.matcher(rawHeaders);
-        matcher.find();
-        String fullRangeHeader = matcher.group(0);
-        return fullRangeHeader.replace("Range: bytes=", "");
+        return requestHeaders.get("Range").replace("bytes=", "");
     }
 
     private int startingByte() {

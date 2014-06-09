@@ -11,7 +11,12 @@ public class PartialContentResponseBuilderTest {
     PartialContentResponseBuilder builder;
     @Before
     public void instantiateBuilder() {
-        builder = new PartialContentResponseBuilder("public/", "Key: Value\r\nRange: bytes=0-3\r\nOtherKey: OtherValue", "mock.html");
+        String directory = "public/";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Key", "Value");
+        headers.put("Range", "bytes=0-3");
+        String resource = "mock.html";
+        builder = new PartialContentResponseBuilder(directory, headers, resource);
     }
 
     @Test
