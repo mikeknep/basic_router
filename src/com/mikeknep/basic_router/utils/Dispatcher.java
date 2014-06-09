@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mrk on 6/2/14.
@@ -27,6 +28,8 @@ public class Dispatcher {
             return new DirectoryResponseBuilder(rootDirectory, collector.getRequestedResource());
         } else if (hasParams(collector.getRequestedResource())) {
             return new ParameterDecodeResponseBuilder(collector.getRequestedResource());
+        } else if (isPartialRequest(collector.getHeaders())) {
+            return new PartialContentResponseBuilder(rootDirectory, collector.getHeaders(), collector.getRequestedResource());
         } else if (isFile(path)) {
             return new FileResponseBuilder(rootDirectory, collector.getRequestedResource());
         } else {
@@ -69,5 +72,9 @@ public class Dispatcher {
     private static boolean hasParams(String requestedResource) {
         return (requestedResource.contains("parameters") &&
                 requestedResource.contains("?"));
+    }
+
+    private static boolean isPartialRequest(HashMap<String, String> headers) {
+        return headers.containsKey("Range");
     }
 }

@@ -124,4 +124,18 @@ public class DispatcherTest {
 
         assertEquals(ParameterDecodeResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
+
+    @Test
+    public void itRoutesPartialContentRequestToPartialContentResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/mock.html";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Range", "bytes=0-3");
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(PartialContentResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
+    }
 }
