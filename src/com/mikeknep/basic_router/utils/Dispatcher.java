@@ -25,6 +25,8 @@ public class Dispatcher {
             return new RedirectResponseBuilder();
         } else if (isDirectory(path)) {
             return new DirectoryResponseBuilder(rootDirectory, requestedResource);
+        } else if (hasParams(requestedResource)) {
+            return new ParameterDecodeResponseBuilder(requestedResource);
         } else if (isFile(path)) {
             return new FileResponseBuilder(rootDirectory, requestedResource);
         } else {
@@ -62,5 +64,10 @@ public class Dispatcher {
 
     private static boolean isPostRequest(String method) {
         return (method.equals("POST"));
+    }
+
+    private static boolean hasParams(String requestedResource) {
+        return (requestedResource.contains("parameters") &&
+                requestedResource.contains("?"));
     }
 }

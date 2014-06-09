@@ -45,4 +45,9 @@ public class DispatcherTest {
     public void itRoutesPostRequestsToPostResponseBuilder() {
         assertEquals(PostRequestResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "POST", "/form", "My=Data").getClass());
     }
+
+    @Test
+    public void itRoutesRequestWithParamsToParameterDecoderResponseBuilder() {
+        assertEquals(ParameterDecodeResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/parameters?foo=bar", "").getClass());
+    }
 }
