@@ -9,7 +9,7 @@ public class ParserTest {
     Parser parser;
     @Before
     public void instantiateParser() {
-        String[] args = {"test/sample_files", "GET", "/mock.html"};
+        String[] args = {"test/sample_files", "GET", "/mock.html", "body"};
         parser = new Parser(args);
     }
 
@@ -26,5 +26,10 @@ public class ParserTest {
     @Test
     public void itGetsRequestedResource() {
         assertEquals("/mock.html", parser.getRequestedResource());
+    }
+
+    @Test
+    public void itGetsBody() {
+        assertEquals("body", parser.getBody());
     }
 }

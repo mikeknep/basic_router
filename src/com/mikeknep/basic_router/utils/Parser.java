@@ -7,11 +7,13 @@ public class Parser {
     String rootDirectory;
     String method;
     String requestedResource;
+    String body;
 
     public Parser(String[] args) {
         this.rootDirectory = args[0];
         this.method = args[1];
         this.requestedResource = args[2];
+        this.body = args[3];
     }
 
     public String getRootDirectory() {
@@ -24,5 +26,9 @@ public class Parser {
 
     public String getRequestedResource() {
         return this.requestedResource;
+    }
+
+    public String getBody() {
+        return this.body;
     }
 }
