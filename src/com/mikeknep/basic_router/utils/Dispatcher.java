@@ -11,24 +11,24 @@ import java.util.ArrayList;
  * Created by mrk on 6/2/14.
  */
 public class Dispatcher {
-    public static ResponseBuilder setResponseBuilder(String rootDirectory, String method, String requestedResource, String body) {
-        Path path = Paths.get(rootDirectory + requestedResource);
-        if (isBadRequest(method, requestedResource)) {
+    public static ResponseBuilder setResponseBuilder(String rootDirectory, RequestDataCollector collector) {
+        Path path = Paths.get(rootDirectory + collector.getRequestedResource());
+        if (isBadRequest(collector.getMethod(), collector.getRequestedResource())) {
             return new BadRequestResponseBuilder();
-        } else if (isNotAllowedMethod(method, requestedResource)) {
+        } else if (isNotAllowedMethod(collector.getMethod(), collector.getRequestedResource())) {
             return new MethodNotAllowedResponseBuilder();
-        } else if (isPostRequest(method)) {
-            return new PostRequestResponseBuilder(rootDirectory, requestedResource, body);
-        } else if (isOptionsRequest(method)) {
+        } else if (isPostRequest(collector.getMethod())) {
+            return new PostRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
+        } else if (isOptionsRequest(collector.getMethod())) {
             return new OptionsResponseBuilder();
-        } else if (isRedirect(requestedResource)) {
+        } else if (isRedirect(collector.getRequestedResource())) {
             return new RedirectResponseBuilder();
         } else if (isDirectory(path)) {
-            return new DirectoryResponseBuilder(rootDirectory, requestedResource);
-        } else if (hasParams(requestedResource)) {
-            return new ParameterDecodeResponseBuilder(requestedResource);
+            return new DirectoryResponseBuilder(rootDirectory, collector.getRequestedResource());
+        } else if (hasParams(collector.getRequestedResource())) {
+            return new ParameterDecodeResponseBuilder(collector.getRequestedResource());
         } else if (isFile(path)) {
-            return new FileResponseBuilder(rootDirectory, requestedResource);
+            return new FileResponseBuilder(rootDirectory, collector.getRequestedResource());
         } else {
             return new MissingResourceResponseBuilder(rootDirectory);
         }

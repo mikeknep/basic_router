@@ -3,51 +3,125 @@ package com.mikeknep.basic_router.utils;
 import com.mikeknep.basic_router.builders.*;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.*;
 
 public class DispatcherTest {
     @Test
-    public void itRoutesBadRequestToBadRequestResponseBuilder() {
-        assertEquals(BadRequestResponseBuilder.class, Dispatcher.setResponseBuilder("", "", "", "").getClass());
+    public void itRoutesBadRequestToBadRequestResponseBuilder() throws Exception {
+        String directory = "";
+        String method = "";
+        String resource = "";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(BadRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesOptionsRequestToOptionsResponseBuilder() {
-        assertEquals(OptionsResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "OPTIONS", "/", "").getClass());
+    public void itRoutesOptionsRequestToOptionsResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "OPTIONS";
+        String resource = "/";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(OptionsResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesDirectoryRequestToDirectoryResponseBuilder() {
-        assertEquals(DirectoryResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/", "").getClass());
+    public void itRoutesDirectoryRequestToDirectoryResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(DirectoryResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesFileRequestToFileResponseBuilder() {
-        assertEquals(FileResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/mock.html", "").getClass());
+    public void itRoutesFileRequestToFileResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/mock.html";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(FileResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesMissingResourceRequestToMissingResourceResponseBuilder() {
-        assertEquals(MissingResourceResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/not_here.html", "").getClass());
+    public void itRoutesMissingResourceRequestToMissingResourceResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/not_here.html";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(MissingResourceResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesRedirectRequestToRedirectResponseBuilder() {
-        assertEquals(RedirectResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/redirect", "").getClass());
+    public void itRoutesRedirectRequestToRedirectResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/redirect";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(RedirectResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesDisallowedMethodToMethodNotAllowedResponseBuilder() {
-        assertEquals(MethodNotAllowedResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "PUT", "/file1", "").getClass());
+    public void itRoutesDisallowedMethodToMethodNotAllowedResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "PUT";
+        String resource = "/file1";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(MethodNotAllowedResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesPostRequestsToPostResponseBuilder() {
-        assertEquals(PostRequestResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "POST", "/form", "My=Data").getClass());
+    public void itRoutesPostRequestsToPostResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "POST";
+        String resource = "/form";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "My=Data";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(PostRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 
     @Test
-    public void itRoutesRequestWithParamsToParameterDecoderResponseBuilder() {
-        assertEquals(ParameterDecodeResponseBuilder.class, Dispatcher.setResponseBuilder("public/", "GET", "/parameters?foo=bar", "").getClass());
+    public void itRoutesRequestWithParamsToParameterDecoderResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/parameters?foo=bar";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(ParameterDecodeResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
 }
