@@ -164,4 +164,17 @@ public class DispatcherTest {
 
         assertEquals(DeleteRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
+
+    @Test
+    public void itRoutesUnauthorizedRequestToProtectedResourceResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "GET";
+        String resource = "/logs";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(ProtectedResourceResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
+    }
 }

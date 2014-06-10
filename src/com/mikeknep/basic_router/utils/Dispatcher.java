@@ -16,6 +16,8 @@ public class Dispatcher {
         Path path = Paths.get(rootDirectory + collector.getRequestedResource());
         if (isBadRequest(collector.getMethod(), collector.getRequestedResource())) {
             return new BadRequestResponseBuilder();
+        } else if (isProtectedResource(collector.getRequestedResource())) {
+            return new ProtectedResourceResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getHeaders());
         } else if (isNotAllowedMethod(collector.getMethod(), collector.getRequestedResource())) {
             return new MethodNotAllowedResponseBuilder();
         } else if (isPutRequest(collector.getMethod())) {
@@ -88,5 +90,9 @@ public class Dispatcher {
 
     private static boolean isDeleteRequest(String method) {
         return (method.equals("DELETE"));
+    }
+
+    private static boolean isProtectedResource(String requestedResource) {
+        return (requestedResource.equals("/logs"));
     }
 }
