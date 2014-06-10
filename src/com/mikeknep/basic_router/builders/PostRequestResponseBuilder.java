@@ -39,8 +39,19 @@ public class PostRequestResponseBuilder implements ResponseBuilder {
         try {
             File file = new File(rootDirectory + requestedResource);
             PrintWriter writer = new PrintWriter(file);
-            writer.write(body);
+            writer.write(formatBody(body));
             writer.close();
         } catch (IOException e) {}
+    }
+
+    private String formatBody(String body) {
+        StringBuilder builder = new StringBuilder();
+        if (body.contains("=")) {
+            String[] splits = body.split("=", 2);
+            builder.append(splits[0] + " = " + splits[1]);
+        } else {
+            builder.append(body);
+        }
+        return builder.toString();
     }
 }

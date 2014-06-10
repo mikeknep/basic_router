@@ -13,7 +13,7 @@ public class PostRequestResponseBuilderTest {
     PostRequestResponseBuilder builder;
     @Before
     public void instantiateBuilder() {
-        builder = new PostRequestResponseBuilder("public/", "/form", "foo: bar");
+        builder = new PostRequestResponseBuilder("public/", "/form", "foo=bar");
     }
 
     @Test
@@ -38,6 +38,6 @@ public class PostRequestResponseBuilderTest {
     public void itWritesBodyToAFile() throws Exception {
         byte[] body = Files.readAllBytes(Paths.get("public/form"));
 
-        assertArrayEquals("foo: bar".getBytes(), body);
+        assertArrayEquals("foo = bar".getBytes(), body);
     }
 }
