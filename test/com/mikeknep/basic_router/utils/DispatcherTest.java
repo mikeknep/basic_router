@@ -138,4 +138,17 @@ public class DispatcherTest {
 
         assertEquals(PartialContentResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
+
+    @Test
+    public void itRoutesPUTRequestToPutRequestResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "PUT";
+        String resource = "/form";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "Some=Data";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(PutRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
+    }
 }

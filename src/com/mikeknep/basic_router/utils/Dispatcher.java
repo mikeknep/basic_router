@@ -18,6 +18,8 @@ public class Dispatcher {
             return new BadRequestResponseBuilder();
         } else if (isNotAllowedMethod(collector.getMethod(), collector.getRequestedResource())) {
             return new MethodNotAllowedResponseBuilder();
+        } else if (isPutRequest(collector.getMethod())) {
+            return new PutRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
         } else if (isPostRequest(collector.getMethod())) {
             return new PostRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
         } else if (isOptionsRequest(collector.getMethod())) {
@@ -76,5 +78,9 @@ public class Dispatcher {
 
     private static boolean isPartialRequest(HashMap<String, String> headers) {
         return headers.containsKey("Range");
+    }
+
+    private static boolean isPutRequest(String method) {
+        return (method.equals("PUT"));
     }
 }
