@@ -24,6 +24,8 @@ public class Dispatcher {
             return new PostRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
         } else if (isOptionsRequest(collector.getMethod())) {
             return new OptionsResponseBuilder();
+        } else if (isDeleteRequest(collector.getMethod())) {
+            return new DeleteRequestResponseBuilder(rootDirectory, collector.getRequestedResource());
         } else if (isRedirect(collector.getRequestedResource())) {
             return new RedirectResponseBuilder();
         } else if (isDirectory(path)) {
@@ -82,5 +84,9 @@ public class Dispatcher {
 
     private static boolean isPutRequest(String method) {
         return (method.equals("PUT"));
+    }
+
+    private static boolean isDeleteRequest(String method) {
+        return (method.equals("DELETE"));
     }
 }

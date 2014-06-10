@@ -151,4 +151,17 @@ public class DispatcherTest {
 
         assertEquals(PutRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
+
+    @Test
+    public void itRoutesDELETERequestToDeleteRequestResponseBuilder() throws Exception {
+        String directory = "public/";
+        String method = "DELETE";
+        String resource = "/form";
+        HashMap<String, String> headers = new HashMap<String, String>();
+        String body = "";
+
+        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+
+        assertEquals(DeleteRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
+    }
 }
