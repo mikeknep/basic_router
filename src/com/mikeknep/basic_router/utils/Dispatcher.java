@@ -20,7 +20,7 @@ public class Dispatcher {
             return new ProtectedResourceResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getHeaders());
         } else if (isNotAllowedMethod(collector.getMethod(), collector.getRequestedResource())) {
             return new MethodNotAllowedResponseBuilder();
-        } else if (isPutRequest(collector.getMethod())) {
+        } else if (isValidPutRequest(collector.getMethod(), path)) {
             return new PutRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
         } else if (isPostRequest(collector.getMethod())) {
             return new PostRequestResponseBuilder(rootDirectory, collector.getRequestedResource(), collector.getBody());
@@ -84,8 +84,8 @@ public class Dispatcher {
         return headers.containsKey("Range");
     }
 
-    private static boolean isPutRequest(String method) {
-        return (method.equals("PUT"));
+    private static boolean isValidPutRequest(String method, Path path) {
+        return (method.equals("PUT") && Files.exists(path));
     }
 
     private static boolean isDeleteRequest(String method) {

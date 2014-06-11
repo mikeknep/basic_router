@@ -143,7 +143,7 @@ public class DispatcherTest {
     public void itRoutesPUTRequestToPutRequestResponseBuilder() throws Exception {
         String directory = "public/";
         String method = "PUT";
-        String resource = "/form";
+        String resource = "/mock.html";
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "Some=Data";
 

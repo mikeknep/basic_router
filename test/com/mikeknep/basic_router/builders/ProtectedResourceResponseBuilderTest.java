@@ -71,13 +71,13 @@ public class ProtectedResourceResponseBuilderTest {
 
 
     @Test
-    public void itReturnsEmptyBodyWhenNoCredentials() {
-        assertArrayEquals("".getBytes(), noCredsBuilder.getBody());
+    public void itReturnsAuthRequiredBodyWhenNoCredentials() {
+        assertArrayEquals("Authentication required".getBytes(), noCredsBuilder.getBody());
     }
 
     @Test
-    public void itReturnsEmptyBodyWhenBadCredentials() {
-        assertArrayEquals("".getBytes(), badCredsBuilder.getBody());
+    public void itReturnsAuthRequiredBodyWhenBadCredentials() {
+        assertArrayEquals("Authentication required".getBytes(), badCredsBuilder.getBody());
     }
 
     @Test

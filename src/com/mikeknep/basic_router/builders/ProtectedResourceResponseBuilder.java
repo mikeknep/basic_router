@@ -45,7 +45,7 @@ public class ProtectedResourceResponseBuilder implements ResponseBuilder {
                 return "".getBytes();
             }
         } else {
-            return "".getBytes();
+            return "Authentication required".getBytes();
         }
     }
 
