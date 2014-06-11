@@ -1,5 +1,7 @@
 package com.mikeknep.basic_router.builders;
 
+import com.mikeknep.basic_router.utils.Logger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +14,9 @@ import java.util.HashMap;
 public class MissingResourceResponseBuilder implements ResponseBuilder {
     private Path filepath;
 
-    public MissingResourceResponseBuilder(String rootDirectory) {
+    public MissingResourceResponseBuilder(String rootDirectory, String method, String requestedResource) {
         this.filepath = Paths.get(rootDirectory + "/404.html");
+        Logger.addToLog(method + " " + requestedResource + " HTTP/1.1");
     }
 
     public String getStatus() {
