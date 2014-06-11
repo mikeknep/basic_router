@@ -25,7 +25,8 @@ public class PartialContentResponseBuilder implements ResponseBuilder {
 
     public HashMap<String, String> getHeaders() {
         HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Range", rawByteRange());
+        headers.put("Content-Range", formatContentRange());
+        headers.put("Content-Length", partialResourceLength());
         return headers;
     }
 
@@ -52,5 +53,19 @@ public class PartialContentResponseBuilder implements ResponseBuilder {
 
     private int endingByte() {
         return Integer.valueOf(rawByteRange().split("-")[1]);
+    }
+
+    private String fullResourceLength() {
+        File file = new File(rootDirectory + requestedResource);
+        long length = file.length();
+        return String.valueOf(length);
+    }
+
+    private String formatContentRange() {
+        return ("bytes " + rawByteRange() + "/" + fullResourceLength());
+    }
+
+    private String partialResourceLength() {
+        return String.valueOf(endingByte() - startingByte());
     }
 }

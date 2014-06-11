@@ -3,6 +3,7 @@ package com.mikeknep.basic_router.builders;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -27,7 +28,8 @@ public class PartialContentResponseBuilderTest {
     @Test
     public void itReturnsHeaders() {
         HashMap<String, String> expectedHeaders = new HashMap<String, String>();
-        expectedHeaders.put("Content-Range", "0-3");
+        expectedHeaders.put("Content-Range", "bytes 0-3/" + String.valueOf(new File("public/mock.html").length()));
+        expectedHeaders.put("Content-Length", "3");
 
         assertEquals(expectedHeaders, builder.getHeaders());
     }
