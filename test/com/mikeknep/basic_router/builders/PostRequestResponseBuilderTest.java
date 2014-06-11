@@ -18,7 +18,7 @@ public class PostRequestResponseBuilderTest {
 
     @Test
     public void itReturns303Status() {
-        assertEquals("303 See Other", builder.getStatus());
+        assertEquals("200 OK", builder.getStatus());
     }
 
     @Test

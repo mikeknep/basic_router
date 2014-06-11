@@ -21,7 +21,7 @@ public class PostRequestResponseBuilder implements ResponseBuilder {
     }
 
     public String getStatus() {
-        return "303 See Other";
+        return "200 OK";
     }
 
     public HashMap<String, String> getHeaders() {
