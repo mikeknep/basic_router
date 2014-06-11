@@ -26,7 +26,7 @@ public class PostRequestResponseBuilder implements ResponseBuilder {
 
     public HashMap<String, String> getHeaders() {
         HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Location", requestedResource);
+        headers.put("Location", "http://localhost:5000/" + (rootDirectory + requestedResource).replace("//", "/"));
         return headers;
     }
 

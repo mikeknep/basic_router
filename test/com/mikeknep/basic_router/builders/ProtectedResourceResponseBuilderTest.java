@@ -2,7 +2,6 @@ package com.mikeknep.basic_router.builders;
 
 import static javax.xml.bind.DatatypeConverter.printBase64Binary;
 
-import com.mikeknep.basic_router.utils.Logger;
 import org.junit.Before;
 import org.junit.Test;
 

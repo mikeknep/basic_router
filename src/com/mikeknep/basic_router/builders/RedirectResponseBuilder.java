@@ -12,7 +12,7 @@ public class RedirectResponseBuilder implements ResponseBuilder {
 
     public HashMap<String, String> getHeaders() {
         HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Location", "/");
+        headers.put("Location", "http://localhost:5000/");
         return headers;
     }
 

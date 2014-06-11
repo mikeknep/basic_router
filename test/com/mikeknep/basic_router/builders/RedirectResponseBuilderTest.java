@@ -23,7 +23,7 @@ public class RedirectResponseBuilderTest {
     @Test
     public void itSetsLocationInHeaders() {
         HashMap<String, String> expectedHeaders = new HashMap<String, String>();
-        expectedHeaders.put("Location", "/");
+        expectedHeaders.put("Location", "http://localhost:5000/");
     }
 
     @Test

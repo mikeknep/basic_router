@@ -24,7 +24,7 @@ public class PostRequestResponseBuilderTest {
     @Test
     public void itReturnsHeaders() {
         HashMap<String, String> expectedHeaders = new HashMap<String, String>();
-        expectedHeaders.put("Location", "/form");
+        expectedHeaders.put("Location", "http://localhost:5000/public/form");
 
         assertEquals(expectedHeaders, builder.getHeaders());
     }
