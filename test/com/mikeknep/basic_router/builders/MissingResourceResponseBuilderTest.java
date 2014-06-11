@@ -1,7 +1,5 @@
 package com.mikeknep.basic_router.builders;
 
-import com.mikeknep.basic_router.builders.MissingResourceResponseBuilder;
-import com.mikeknep.basic_router.utils.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,8 +12,8 @@ public class MissingResourceResponseBuilderTest {
     MissingResourceResponseBuilder no404Builder;
     @Before
     public void instantiateMissingResourceResponseBuilder() {
-        yes404Builder = new MissingResourceResponseBuilder("test/sample_files/", "GET", "/nothere");
-        no404Builder = new MissingResourceResponseBuilder("test/", "GET", "/nothere");
+        yes404Builder = new MissingResourceResponseBuilder("test/sample_files/");
+        no404Builder = new MissingResourceResponseBuilder("test/");
     }
 
 
@@ -48,10 +46,5 @@ public class MissingResourceResponseBuilderTest {
     @Test
     public void itReturns404PlainTextBody() {
         assertArrayEquals("404".getBytes(), no404Builder.getBody());
-    }
-
-    @Test
-    public void itLogsMissingResourceToGlobalLog() {
-        assertTrue(Logger.getLog().contains("GET /nothere HTTP/1.1"));
     }
 }

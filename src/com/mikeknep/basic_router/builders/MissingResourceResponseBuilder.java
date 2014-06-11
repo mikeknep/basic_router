@@ -14,9 +14,8 @@ import java.util.HashMap;
 public class MissingResourceResponseBuilder implements ResponseBuilder {
     private Path filepath;
 
-    public MissingResourceResponseBuilder(String rootDirectory, String method, String requestedResource) {
+    public MissingResourceResponseBuilder(String rootDirectory) {
         this.filepath = Paths.get(rootDirectory + "/404.html");
-        Logger.addToLog(method + " " + requestedResource + " HTTP/1.1");
     }
 
     public String getStatus() {

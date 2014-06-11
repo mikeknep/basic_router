@@ -39,7 +39,7 @@ public class Dispatcher {
         } else if (isFile(path)) {
             return new FileResponseBuilder(rootDirectory, collector.getRequestedResource());
         } else {
-            return new MissingResourceResponseBuilder(rootDirectory, collector.getMethod(), collector.getRequestedResource());
+            return new MissingResourceResponseBuilder(rootDirectory);
         }
     }
 

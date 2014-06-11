@@ -84,6 +84,6 @@ public class ProtectedResourceResponseBuilderTest {
 
     @Test
     public void itReturnsFileBodyWhenGoodCredentials() {
-        assertArrayEquals(Logger.getLog().getBytes(), goodCredsBuilder.getBody());
+        assertArrayEquals("These are secret logs.".getBytes(), goodCredsBuilder.getBody());
     }
 }

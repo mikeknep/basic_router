@@ -41,7 +41,11 @@ public class ProtectedResourceResponseBuilder implements ResponseBuilder {
 
     public byte[] getBody() {
         if (validCredentials()) {
-            return Logger.getLog().getBytes();
+            try {
+                return Files.readAllBytes(Paths.get(rootDirectory + requestedResource));
+            } catch (IOException e) {
+                return "".getBytes();
+            }
         } else {
             return "Authentication required".getBytes();
         }
