@@ -1,5 +1,7 @@
 package com.mikeknep.basic_router.builders;
 
+import com.mikeknep.basic_router.utils.Logger;
+
 import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,11 +41,7 @@ public class ProtectedResourceResponseBuilder implements ResponseBuilder {
 
     public byte[] getBody() {
         if (validCredentials()) {
-            try {
-                return Files.readAllBytes(Paths.get(rootDirectory + requestedResource));
-            } catch (IOException e) {
-                return "".getBytes();
-            }
+            return Logger.getLog().getBytes();
         } else {
             return "Authentication required".getBytes();
         }
