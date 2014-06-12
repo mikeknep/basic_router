@@ -7,14 +7,14 @@ import java.util.HashMap;
 /**
  * Created by mrk on 6/9/14.
  */
-public class ObjectExchangeStream implements ExchangeStream {
+public class ObjectIncomingStream implements IncomingStream {
     private ObjectInputStream objectInputStream;
     private String method;
     private String resource;
     private HashMap<String, String> headers;
     private String body;
 
-    public ObjectExchangeStream(InputStream incoming) throws Exception {
+    public ObjectIncomingStream(InputStream incoming) throws Exception {
         this.objectInputStream = new ObjectInputStream(incoming);
         this.method = (String) objectInputStream.readObject();
         this.resource = (String) objectInputStream.readObject();

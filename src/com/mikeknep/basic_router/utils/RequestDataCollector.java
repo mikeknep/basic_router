@@ -11,7 +11,7 @@ public class RequestDataCollector {
     private HashMap<String, String> headers;
     private String body;
 
-    public RequestDataCollector(ExchangeStream incoming) throws Exception {
+    public RequestDataCollector(IncomingStream incoming) throws Exception {
         this.method = incoming.getMethod();
         this.resource = incoming.getResource();
         this.headers = incoming.getHeaders();

@@ -15,8 +15,8 @@ public class RequestDataCollectorTest {
         String mockResource = "/";
         HashMap<String, String> mockHeaders = new HashMap<String, String>();
         String mockBody = "body";
-        ExchangeStream mockExchangeStream = new MockExchangeStream(mockMethod, mockResource, mockHeaders, mockBody);
-        collector = new RequestDataCollector(mockExchangeStream);
+        IncomingStream mockIncomingStream = new MockIncomingStream(mockMethod, mockResource, mockHeaders, mockBody);
+        collector = new RequestDataCollector(mockIncomingStream);
     }
 
     @Test

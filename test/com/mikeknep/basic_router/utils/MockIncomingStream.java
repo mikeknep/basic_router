@@ -5,13 +5,13 @@ import java.util.HashMap;
 /**
  * Created by mrk on 6/9/14.
  */
-public class MockExchangeStream implements ExchangeStream {
+public class MockIncomingStream implements IncomingStream {
     private String method;
     private String resource;
     private HashMap<String, String> headers;
     private String body;
 
-    public MockExchangeStream(String method, String resource, HashMap<String, String> headers, String body) {
+    public MockIncomingStream(String method, String resource, HashMap<String, String> headers, String body) {
         this.method = method;
         this.resource = resource;
         this.headers = headers;

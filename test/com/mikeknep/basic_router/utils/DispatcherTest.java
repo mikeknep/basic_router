@@ -16,7 +16,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(BadRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -29,7 +29,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(OptionsResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -42,7 +42,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(DirectoryResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -55,7 +55,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(FileResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -68,7 +68,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(MissingResourceResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -81,7 +81,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(RedirectResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -94,7 +94,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(MethodNotAllowedResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -107,7 +107,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "My=Data";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(PostRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -120,7 +120,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(ParameterDecodeResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -134,7 +134,7 @@ public class DispatcherTest {
         headers.put("Range", "bytes=0-3");
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(PartialContentResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -147,7 +147,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "Some=Data";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(PutRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -160,7 +160,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(DeleteRequestResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
@@ -173,7 +173,7 @@ public class DispatcherTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         String body = "";
 
-        RequestDataCollector collector = new RequestDataCollector(new MockExchangeStream(method, resource, headers, body));
+        RequestDataCollector collector = new RequestDataCollector(new MockIncomingStream(method, resource, headers, body));
 
         assertEquals(ProtectedResourceResponseBuilder.class, Dispatcher.setResponseBuilder(directory, collector).getClass());
     }
