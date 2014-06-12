@@ -1,6 +1,5 @@
 package com.mikeknep.basic_router.incoming;
 
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
 
@@ -14,8 +13,8 @@ public class ObjectIncomingStream implements IncomingStream {
     private HashMap<String, String> headers;
     private String body;
 
-    public ObjectIncomingStream(InputStream incoming) throws Exception {
-        this.objectInputStream = new ObjectInputStream(incoming);
+    public ObjectIncomingStream() throws Exception {
+        this.objectInputStream = new ObjectInputStream(System.in);
         this.method = (String) objectInputStream.readObject();
         this.resource = (String) objectInputStream.readObject();
         this.headers = (HashMap<String, String>) objectInputStream.readObject();

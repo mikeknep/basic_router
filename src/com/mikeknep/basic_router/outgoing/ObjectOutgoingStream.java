@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
  */
 public class ObjectOutgoingStream implements OutgoingStream {
     private ObjectOutputStream oos;
+
     public ObjectOutgoingStream() throws Exception {
         oos = new ObjectOutputStream(System.out);
     }

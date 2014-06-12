@@ -13,7 +13,7 @@ import com.mikeknep.basic_router.utils.*;
 public class Main {
     public static void main(String[] args) throws Exception {
         ArgsParser argsParser = new ArgsParser(args);
-        RequestDataCollector collector = new RequestDataCollector(new ObjectIncomingStream(System.in));
+        RequestDataCollector collector = new RequestDataCollector(new ObjectIncomingStream());
         ResponseBuilder builder = Dispatcher.setResponseBuilder(argsParser.getRootDirectory(), collector);
         Responder.sendData(new ObjectOutgoingStream(), builder);
     }
