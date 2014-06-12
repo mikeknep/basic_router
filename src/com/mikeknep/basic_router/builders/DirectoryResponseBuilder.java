@@ -11,27 +11,44 @@ import java.util.HashMap;
 public class DirectoryResponseBuilder implements ResponseBuilder {
     private String rootDirectory;
     private Path resourcePath;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
     public DirectoryResponseBuilder(String rootDirectory, String requestedResource) {
         this.rootDirectory = rootDirectory;
         this.resourcePath = Paths.get(rootDirectory + requestedResource);
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "200 OK";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "text/html");
-        return headers;
+        return this.headers;
     }
 
     public byte[] getBody() {
-        return generateBody();
+        return this.body;
     }
 
 
+
+    private void setStatus() {
+        this.status = "200 OK";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+        headers.put("Content-Type", "text/html");
+    }
+
+    private void setBody() {
+        this.body = generateBody();
+    }
 
     private byte[] generateBody() {
         StringBuilder builder = new StringBuilder();

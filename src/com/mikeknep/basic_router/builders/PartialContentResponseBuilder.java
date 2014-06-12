@@ -12,34 +12,51 @@ public class PartialContentResponseBuilder implements ResponseBuilder {
     private String rootDirectory;
     private HashMap<String, String> requestHeaders;
     private String requestedResource;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
     public PartialContentResponseBuilder(String rootDirectory, HashMap<String, String> requestHeaders, String requestedResource) {
         this.rootDirectory = rootDirectory;
         this.requestHeaders = requestHeaders;
         this.requestedResource = requestedResource;
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "206 Partial Content";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Range", formatContentRange());
-        headers.put("Content-Length", partialResourceLength());
-        return headers;
+        return this.headers;
     }
 
     public byte[] getBody() {
+        return this.body;
+    }
+
+
+    private void setStatus() {
+        this.status = "206 Partial Content";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+        headers.put("Content-Range", formatContentRange());
+        headers.put("Content-Length", partialResourceLength());
+    }
+
+    private void setBody() {
         try {
             int length = endingByte() - startingByte();
-            byte[] body = new byte[length];
+            this.body = new byte[length];
             File resource = new File(rootDirectory + requestedResource);
             RandomAccessFile raf = new RandomAccessFile(resource, "r");
             raf.read(body, 0, endingByte() - startingByte());
-            return body;
         } catch (IOException e) {
-            return "".getBytes();
+            this.body = "".getBytes();
         }
     }
 

@@ -9,26 +9,44 @@ import java.util.HashMap;
  */
 public class ParameterDecodeResponseBuilder implements ResponseBuilder {
     private String rawParams;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
     public ParameterDecodeResponseBuilder(String requestedResource) {
-        this.rawParams = requestedResource.split("\\?", 2)[1];
-    }
-
-    public String getRawParams() {
-        return this.rawParams;
+        setRawParams(requestedResource);
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "200 OK";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        return headers;
+        return this.headers;
     }
     
     public byte[] getBody() {
-        return (parseParams(rawParams)).getBytes();
+        return this.body;
+    }
+
+    private void setStatus() {
+        this.status = "200 OK";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+    }
+
+    private void setBody() {
+        this.body = parseParams(rawParams).getBytes();
+    }
+
+
+    private void setRawParams(String requestedResource) {
+        this.rawParams = requestedResource.split("\\?", 2)[1];
     }
 
     private String parseParams(String rawParams) {

@@ -15,11 +15,6 @@ public class ParameterDecodeResponseBuilderTest {
     }
 
     @Test
-    public void itReturnsRawParameters() {
-        assertEquals("foo=bar&foofoo=%22bar%20bar%22", builder.getRawParams());
-    }
-
-    @Test
     public void itReturns200Status() {
         assertEquals("200 OK", builder.getStatus());
     }

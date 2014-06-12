@@ -11,35 +11,54 @@ import java.util.HashMap;
 public class PostRequestResponseBuilder implements ResponseBuilder {
     private String rootDirectory;
     private String requestedResource;
-    private String body;
+    private String requestBody;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
-    public PostRequestResponseBuilder(String rootDirectory, String requestedResource, String body) {
+
+    public PostRequestResponseBuilder(String rootDirectory, String requestedResource, String requestBody) {
         this.rootDirectory = rootDirectory;
         this.requestedResource = requestedResource;
-        this.body = body;
+        this.requestBody = requestBody;
         createFile();
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "200 OK";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Location", "http://localhost:5000/" + (rootDirectory + requestedResource).replace("//", "/"));
-        return headers;
+        return this.headers;
     }
 
     public byte[] getBody() {
-        return "".getBytes();
+        return this.body;
     }
 
+
+
+    private void setStatus() {
+        this.status = "200 OK";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+        headers.put("Location", "http://localhost:5000/" + (rootDirectory + requestedResource).replace("//", "/"));
+    }
+
+    private void setBody() {
+        this.body = "".getBytes();
+    }
 
     private void createFile() {
         try {
             File file = new File(rootDirectory + requestedResource);
             PrintWriter writer = new PrintWriter(file);
-            writer.write(formatBody(body));
+            writer.write(formatBody(requestBody));
             writer.close();
         } catch (IOException e) {}
     }

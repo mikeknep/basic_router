@@ -11,26 +11,44 @@ import java.util.HashMap;
  */
 public class FileResponseBuilder implements ResponseBuilder {
     private Path resourcePath;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
     public FileResponseBuilder(String rootDirectory, String requestedResource) {
         this.resourcePath = Paths.get(rootDirectory + requestedResource);
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "200 OK";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", URLConnection.guessContentTypeFromName(String.valueOf(resourcePath)));
-        return headers;
+        return this.headers;
     }
 
     public byte[] getBody() {
+        return this.body;
+    }
+
+
+    private void setStatus() {
+        this.status = "200 OK";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+        headers.put("Content-Type", URLConnection.guessContentTypeFromName(String.valueOf(resourcePath)));
+    }
+
+    private void setBody() {
         try {
-            return Files.readAllBytes(resourcePath);
+            this.body = Files.readAllBytes(resourcePath);
         } catch (Exception e) {
-            return "".getBytes();
+            this.body = "".getBytes();
         }
     }
 }

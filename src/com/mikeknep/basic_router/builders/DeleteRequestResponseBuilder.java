@@ -11,29 +11,47 @@ import java.util.HashMap;
 public class DeleteRequestResponseBuilder implements ResponseBuilder {
     private String rootDirectory;
     private String requestedResource;
+    private String status;
+    private HashMap<String, String> headers;
+    private byte[] body;
 
     public DeleteRequestResponseBuilder(String rootDirectory, String requestedResource) {
         this.rootDirectory = rootDirectory;
         this.requestedResource = requestedResource;
         deleteFile();
+        setStatus();
+        setHeaders();
+        setBody();
     }
 
     public String getStatus() {
-        return "200 OK";
+        return this.status;
     }
 
     public HashMap<String, String> getHeaders() {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        return headers;
+        return this.headers;
     }
 
     public byte[] getBody() {
-        return "".getBytes();
+        return this.body;
     }
+
 
     private void deleteFile() {
         try {
             Files.deleteIfExists(Paths.get(rootDirectory + requestedResource));
         } catch (IOException e) {}
+    }
+
+    private void setStatus() {
+        this.status = "200 OK";
+    }
+
+    private void setHeaders() {
+        this.headers = new HashMap<String, String>();
+    }
+
+    private void setBody() {
+        this.body = "".getBytes();
     }
 }
