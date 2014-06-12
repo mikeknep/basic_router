@@ -1,4 +1,4 @@
-package com.mikeknep.basic_router.utils;
+package com.mikeknep.basic_router.incoming;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;

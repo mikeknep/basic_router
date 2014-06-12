@@ -1,9 +1,6 @@
-package com.mikeknep.basic_router.utils;
+package com.mikeknep.basic_router.outgoing;
 
 import com.mikeknep.basic_router.builders.ResponseBuilder;
-
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
 
 /**
  * Created by mrk on 6/2/14.

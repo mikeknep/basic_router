@@ -1,4 +1,6 @@
-package com.mikeknep.basic_router.utils;
+package com.mikeknep.basic_router.incoming;
+
+import com.mikeknep.basic_router.incoming.IncomingStream;
 
 import java.util.HashMap;
 

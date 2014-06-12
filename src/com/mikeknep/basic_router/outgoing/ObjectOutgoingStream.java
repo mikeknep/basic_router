@@ -1,7 +1,6 @@
-package com.mikeknep.basic_router.utils;
+package com.mikeknep.basic_router.outgoing;
 
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 
 /**
  * Created by mrk on 6/12/14.
