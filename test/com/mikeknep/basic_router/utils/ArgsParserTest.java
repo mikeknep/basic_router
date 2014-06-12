@@ -9,7 +9,7 @@ public class ArgsParserTest {
     ArgsParser parser;
     @Before
     public void instantiateParser() {
-        String[] args = {"test/sample_files", "GET", "/mock.html", "body"};
+        String[] args = {"test/sample_files"};
         parser = new ArgsParser(args);
     }
 
