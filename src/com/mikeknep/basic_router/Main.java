@@ -11,6 +11,6 @@ public class Main {
         ArgsParser argsParser = new ArgsParser(args);
         RequestDataCollector collector = new RequestDataCollector(new ObjectExchangeStream(System.in));
         ResponseBuilder builder = Dispatcher.setResponseBuilder(argsParser.getRootDirectory(), collector);
-        Responder.sendData(builder.getStatus(), builder.getHeaders(), builder.getBody());
+        Responder.sendData(new ObjectOutgoingStream(), builder);
     }
 }
