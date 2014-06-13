@@ -1,5 +1,3 @@
-# Basic HTTP Router
+# Cob Spec Router
 
-This is a basic HTTP request/response router.
-
-In addition to serving files and directories, it can handle bad requests (such as so-called "phantom" requests) and missing resources (404).
+This application is designed to pass 8th Light's server test suite, [Cob Spec](https://github.com/8thlight/cob_spec).
